@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  # PostgreSQL service
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: nim_grav
+      POSTGRES_PASSWORD: nimble_grtavity_usecase
+      POSTGRES_DB: employee_case
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # PostgREST service
+  postgrest:
+    image: postgrest/postgrest:latest
+    environment:
+      PGRST_DB_URI: postgres://nim_grav:nimble_grtavity_usecase@postgres:5432/employee_case
+      PGRST_DB_SCHEMA: emp_api
+      PGRST_DB_ANON_ROLE: web_anon
+    ports:
+      - "3000:3000"
+
+  # Python service
+  python-app:
+    build:
+      context: ./app  
+    depends_on:
+      - postgres
+    volumes:
+      - ./app:/app
+    environment:
+      DATABASE_URL: postgres://myuser:mypassword@postgres:5432/employee_case
+    command: ["sh", "/app/create_postgres_api.sh"]  
+
+volumes:
+  postgres-data: {}

@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Update package information
-sudo apt update
+#sudo apt update
 
 # Install PostgreSQL
-sudo apt install -y postgresql-16
+#sudo apt install -y postgresql-16
 
 # Install PostgREST from source:
-curl -sSL https://get.haskellstack.org/ | sh
-git clone https://github.com/PostgREST/postgrest.git
-cd postgrest
+#curl -sSL https://get.haskellstack.org/ | sh
+#git clone https://github.com/PostgREST/postgrest.git
+#cd postgrest
 # adjust local-bin-path to taste
-sudo stack build --install-ghc --copy-bins --local-bin-path /usr/local/bin
+#sudo stack build --install-ghc --copy-bins --local-bin-path /usr/local/bin
 
 # Start the PostgreSQL service
 sudo service postgresql start
