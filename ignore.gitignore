@@ -1,0 +1,3 @@
+# Ignore final models
+/app/women_gov_employee_final_model.pkl
+/app/production_supervision_ratio_final_model.h5
