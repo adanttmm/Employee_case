@@ -1,3 +1,5 @@
+GRANT USAGE ON SCHEMA emp_api TO web_anon;
+
 drop table if exists emp_api.women_in_government;
 create table emp_api.women_in_government as
 select
@@ -14,6 +16,20 @@ select
 from public.required_ts rt 
 where production_employees is not null
 	and all_employees is not null;
-	
+
+drop table if exists emp_api.women_in_government_forecast;
+create table emp_api.women_in_government_forecast (
+	date_series date,
+	forecast decimal
+);
+
+drop table if exists emp_api.production_supervision_forecast;
+create table emp_api.production_supervision_forecast (
+	date_series date,
+	forecast decimal
+);
+
 GRANT SELECT ON emp_api.women_in_government TO web_anon;
 GRANT SELECT ON emp_api.production_supervision_ratio TO web_anon;
+GRANT SELECT ON emp_api.women_in_government_forecast TO web_anon;
+GRANT SELECT ON emp_api.production_supervision_forecast TO web_anon;

@@ -14,3 +14,7 @@ COPY . /app/
 
 # Run database scrapper
 CMD ["python", "scrapper.py"]
+
+# Run forecast
+CMD ["python", "write_forecast.py"]
+

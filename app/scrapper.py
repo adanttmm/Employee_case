@@ -17,7 +17,7 @@ Only the following files will be downloaded:
     ce.series
     ce.supersector
 
-Based on the documentation foun in https://download.bls.gov/pub/time.series/ce/ce.txt these will serve the intended purposes of analyzing:
+Based on the documentation found in https://download.bls.gov/pub/time.series/ce/ce.txt these will serve the intended purposes of analyzing:
     1. Women government employment trend
     2. Production vs Supervision employment trend
 
@@ -97,6 +97,18 @@ files_to_download = [
 # Loop through the list of files and load data into the database
 for filename in files_to_download:
     download_and_load_file(filename)
+    
+# Execute the SQL scripts
+with open("MatViz_generate.sql", "r") as sql_file:
+    sql_script = sql_file.read()
+    cursor.execute(sql_script)
+    conn.commit()
+
+
+with open("RestApi_setup.sql", "r") as sql_file:
+    sql_script = sql_file.read()
+    cursor.execute(sql_script)
+    conn.commit()
 
 # Close the database connection
 cursor.close()
